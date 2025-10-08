@@ -30,20 +30,32 @@ type Link = {
   link_id: string;
   link_name: string;
   link_url: string;
-  link_source_name: string;
-  link_medium_name: string;
-  link_campaign_name: string;
-  link_content_name: string;
+  link_source_name: string | null;
+  link_medium_name: string | null;
+  link_campaign_name: string | null;
+  link_content_name: string | null;
 };
 
 const links = Array.from({ length: 300 }, () => ({
   link_id: faker.string.uuid(),
   link_name: faker.company.name(),
   link_url: faker.internet.url(),
-  link_source_name: faker.helpers.arrayElement(sources).name,
-  link_medium_name: faker.helpers.arrayElement(mediums).name,
-  link_campaign_name: faker.helpers.arrayElement(campaigns).name,
-  link_content_name: faker.helpers.arrayElement(contents).name,
+  link_source_name:
+    faker.helpers.maybe(() => faker.helpers.arrayElement(sources).name, {
+      probability: 0.8,
+    }) ?? null,
+  link_medium_name:
+    faker.helpers.maybe(() => faker.helpers.arrayElement(mediums).name, {
+      probability: 0.7,
+    }) ?? null,
+  link_campaign_name:
+    faker.helpers.maybe(() => faker.helpers.arrayElement(campaigns).name, {
+      probability: 0.6,
+    }) ?? null,
+  link_content_name:
+    faker.helpers.maybe(() => faker.helpers.arrayElement(contents).name, {
+      probability: 0.6,
+    }) ?? null,
 })) as Link[];
 
 const users = Array.from({ length: 1000 }, () => ({

@@ -61,24 +61,56 @@ export function App() {
         header: () => (
           <span className="text-left whitespace-normal">Source</span>
         ),
+        getGroupingValue: (row) => {
+          const value = row.link_source_name ?? "Без источника";
+          return value;
+        },
+        cell: ({ getValue }) => {
+          const value = getValue<string | null>();
+          return value ? value : "-";
+        },
       },
       {
         accessorKey: "link_medium_name",
         header: () => (
           <span className="text-left whitespace-normal">Medium</span>
         ),
+        getGroupingValue: (row) => {
+          const value = row.link_medium_name ?? "Без медиума";
+          return value;
+        },
+        cell: ({ getValue }) => {
+          const value = getValue<string | null>();
+          return value ? value : "-";
+        },
       },
       {
         accessorKey: "link_campaign_name",
         header: () => (
           <span className="text-left whitespace-normal">Campaign</span>
         ),
+        getGroupingValue: (row) => {
+          const value = row.link_campaign_name ?? "Без кампании";
+          return value;
+        },
+        cell: ({ getValue }) => {
+          const value = getValue<string | null>();
+          return value ? value : "-";
+        },
       },
       {
         accessorKey: "link_content_name",
         header: () => (
           <span className="text-left whitespace-normal">Content</span>
         ),
+        getGroupingValue: (row) => {
+          const value = row.link_content_name ?? "Без контента";
+          return value;
+        },
+        cell: ({ getValue }) => {
+          const value = getValue<string | null>();
+          return value ? value : "-";
+        },
       },
       {
         accessorKey: "product_name",
@@ -125,6 +157,7 @@ export function App() {
           const value = row.purchase_date ? true : false;
           return value;
         },
+
         aggregationFn: "truthyCount",
       },
       {
